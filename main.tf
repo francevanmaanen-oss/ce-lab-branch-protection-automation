@@ -7,24 +7,24 @@ terraform {
     }
   }
 }
- 
+
 provider "aws" {
   region = var.aws_region
 }
- 
+
 resource "aws_s3_bucket" "app_assets" {
   bucket = "${var.project_name}-${var.environment}-assets-francevanmaanen"
- 
+
   tags = {
     Name        = "${var.project_name}-assets"
     Environment = var.environment
     ManagedBy   = "Terraform"
   }
 }
- 
+
 resource "aws_s3_bucket_versioning" "app_assets" {
   bucket = aws_s3_bucket.app_assets.id
- 
+
   versioning_configuration {
     status = "Enabled"
   }
